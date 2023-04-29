@@ -139,10 +139,31 @@ namespace Accompany_consulting.Controllers
             {
                 return NotFound("User not found");
             }
-
+            else { 
             return user;
+            }
         }
-         
+
+        //get user by email 
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<User>> GetUserByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+            else
+            {
+                return user;
+            }
+        }
+
+
+
+
+
+
 
     }
 }
