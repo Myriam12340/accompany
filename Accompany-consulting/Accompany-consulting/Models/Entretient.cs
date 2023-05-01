@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Accompany_consulting.Models
 {
@@ -7,6 +8,7 @@ namespace Accompany_consulting.Models
         public int Id { get; set; }
         public string Avis { get; set; }
         public string Statut { get; set; }
+        public Boolean valid { get; set; }
 
 
         [ForeignKey("RecruteurId")] // spécifier la clé étrangère correspondante

@@ -20,13 +20,32 @@ namespace Accompany_consulting.Controllers
         {
             _context = context;
         }
-
-        [HttpGet("entretien/{id}")]
+        //get historique entretien
+        [HttpGet("recruteur/{recruteur}")]
         public async Task<List<Entretient>> GetEntretientsByRecruteur(int recruteur)
         {
             var entretients = await _context.entretien.Where(e => e.Recruteur == recruteur).ToListAsync();
             return entretients;
         }
+
+
+        //get list des entretient a faire 
+        [HttpGet("recruteursuivant/{recruteursuivant}")]
+        public async Task<List<Entretient>> GetEntretientsByRecruteursuivant(int recruteursuivant)
+        {
+            var entretients = await _context.entretien.Where(e => e.RecruteurSuivant == recruteursuivant).ToListAsync();
+            return entretients;
+        }
+
+        //get entretien par candidat
+        [HttpGet("candidat/{candidat}")]
+        public async Task<List<Entretient>> GetEntretientsByCandidat(int candidat)
+        {
+            var entretients = await _context.entretien.Where(e => e.Candidat == candidat).ToListAsync();
+            return entretients;
+        }
+
+
 
 
 
