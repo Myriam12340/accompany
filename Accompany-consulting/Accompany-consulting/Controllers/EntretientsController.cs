@@ -21,6 +21,16 @@ namespace Accompany_consulting.Controllers
             _context = context;
         }
 
+        [HttpGet("entretien/{id}")]
+        public async Task<List<Entretient>> GetEntretientsByRecruteur(int recruteur)
+        {
+            var entretients = await _context.entretien.Where(e => e.Recruteur == recruteur).ToListAsync();
+            return entretients;
+        }
+
+
+
+
         // GET: api/Entretients
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entretient>>> Getentretien()
@@ -85,12 +95,15 @@ namespace Accompany_consulting.Controllers
 
             // add the Candidat and Entretient objects to the database
             _context.candidat.Add(viewModel.Candidat);
-            viewModel.Entretient.Candidat = viewModel.Candidat;
+            await _context.SaveChangesAsync(); // save changes to generate ID for Candidat
+
+            viewModel.Entretient.Candidat = viewModel.Candidat.Id; // update Entretient.Candidat with the ID of the newly created Candidat
             _context.entretien.Add(viewModel.Entretient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEntretient", new { id = viewModel.Entretient.Id }, viewModel.Entretient);
         }
+
 
 
 

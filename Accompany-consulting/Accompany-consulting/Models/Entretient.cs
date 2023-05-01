@@ -8,16 +8,19 @@ namespace Accompany_consulting.Models
         public string Avis { get; set; }
         public string Statut { get; set; }
 
-     
-        public Candidat Candidat { get; set; }
 
-      
-        public User Recruteur { get; set; }
+        [ForeignKey("RecruteurId")] // spécifier la clé étrangère correspondante
+        public int Recruteur { get; set; }
 
-      
-        public User RecruteurSuivant { get; set; }
+        [ForeignKey("RecruteurSuivantId")] // spécifier la clé étrangère correspondante
+        public int RecruteurSuivant { get; set; }
 
         public string Post { get; set; }
         public string DescriptionPoste { get; set; }
+
+
+        [ForeignKey("candidatId")] // spécifier la clé étrangère correspondante
+
+        public int Candidat { get; set; }
     }
 }

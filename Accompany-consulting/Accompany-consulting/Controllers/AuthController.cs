@@ -28,20 +28,33 @@ namespace Accompany_consulting.Controllers
             _signInManager = signInManager;
             _configuration = configuration;
         }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
-            var user = new User { Email = model.Email, UserName = model.UserName , NormalizedEmail = model.Email ,Role = model.Role };
+            var existingEmailUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingEmailUser != null)
+            {
+                return BadRequest("Email already exists.");
+            }
+
+            var existingUserNameUser = await _userManager.FindByNameAsync(model.UserName);
+            if (existingUserNameUser != null)
+            {
+                return BadRequest("Username already exists.");
+            }
+
+            var user = new User { Email = model.Email, UserName = model.UserName, NormalizedEmail = model.Email, Role = model.Role };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new { Errors = errors });
             }
+
             await _userManager.AddToRoleAsync(user, model.Role);
             return Ok();
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)
         {

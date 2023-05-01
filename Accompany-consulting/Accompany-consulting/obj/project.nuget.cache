@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qqwp9zLKIfDdJn8ph1C9Bk+Udx2rAHPrPEt9CKp3gMBztunwvGSQOHo+LMzo/QazlQx9PoMP+c44M7ugyg9gWw==",
+  "dgSpecHash": "ei1BUAUXbqET/QP9zr1maIj77aVQ1f7PV8hgirmuxyZIs1pxUbAavp0DYur343CAcOzFIfq2/fiSv3WfgxkDdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+  "projectFilePath": "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KSOURI\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\KSOURI\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

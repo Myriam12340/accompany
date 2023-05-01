@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230501133758_update entretien")]
+    partial class updateentretien
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +142,7 @@ namespace Accompany_consulting.Migrations
                     b.Property<string>("Avis")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Candidat")
+                    b.Property<int>("CandidatId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescriptionPoste")
@@ -159,6 +161,8 @@ namespace Accompany_consulting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CandidatId");
 
                     b.ToTable("entretien");
                 });
@@ -355,6 +359,17 @@ namespace Accompany_consulting.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Accompany_consulting.Models.Entretient", b =>
+                {
+                    b.HasOne("Accompany_consulting.Models.Candidat", "Candidat")
+                        .WithMany()
+                        .HasForeignKey("CandidatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Candidat");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

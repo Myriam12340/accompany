@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj": {}
+    "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj": {
+    "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+        "projectUniqueName": "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
         "projectName": "Accompany-consulting",
-        "projectPath": "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+        "projectPath": "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
         "packagesPath": "C:\\Users\\KSOURI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\KSOURI\\Desktop\\PFE\\Accompany-consulting\\Accompany-consulting\\obj\\",
+        "outputPath": "C:\\Users\\KSOURI\\Desktop\\git\\accompany\\Accompany-consulting\\Accompany-consulting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\KSOURI\\AppData\\Roaming\\NuGet\\NuGet.Config",
