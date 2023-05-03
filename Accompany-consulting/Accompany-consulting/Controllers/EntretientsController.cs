@@ -47,7 +47,17 @@ namespace Accompany_consulting.Controllers
 
 
 
-
+        //get candidat 
+        [HttpGet("getcandidat/{id}")]
+        public async Task<ActionResult<Candidat>> GetCandidat(int id)
+        {
+            var candidat = await _context.candidat.FirstOrDefaultAsync(e => e.Id == id);
+            if (candidat == null)
+            {
+                return NotFound();
+            }
+            return Ok(candidat);
+        }
 
 
         // GET: api/Entretients
