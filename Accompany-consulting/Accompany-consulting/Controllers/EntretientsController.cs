@@ -115,7 +115,7 @@ namespace Accompany_consulting.Controllers
         // POST: api/Entretients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Entretient>> PostEntretient(EntretientViewModel viewModel)
+        public async Task<ActionResult<Entretient>> PostEntretientInitial(EntretientViewModel viewModel)
         {
             if (viewModel == null || viewModel.Entretient == null)
             {
@@ -136,6 +136,7 @@ namespace Accompany_consulting.Controllers
 
 
 
+
         // DELETE: api/Entretients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntretient(int id)
@@ -151,6 +152,33 @@ namespace Accompany_consulting.Controllers
 
             return NoContent();
         }
+
+
+        [HttpPost("entretiensuivant")]
+        public async Task<ActionResult<Entretient>> PostEntretienSuivant(Entretient entretient)
+        {
+            _context.entretien.Add(entretient);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEntretient", new { id = entretient.Id }, entretient);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private bool EntretientExists(int id)
         {
