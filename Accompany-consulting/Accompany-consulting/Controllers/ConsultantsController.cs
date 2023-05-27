@@ -1,7 +1,9 @@
 ﻿using Accompany_consulting.Data;
 using Accompany_consulting.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,9 +15,11 @@ namespace Accompany_consulting.Controllers
     public class ConsultantsController : ControllerBase
     {
         private readonly ConsultantContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ConsultantsController(ConsultantContext context)
+        public ConsultantsController(UserManager<User> userManager, ConsultantContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -73,20 +77,46 @@ namespace Accompany_consulting.Controllers
         }
 
 
-      
+
 
 
 
         // POST: api/Consultants
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPost]
         public async Task<ActionResult<Consultant>> PostConsultant(Consultant consultant)
         {
             _context.Consultants.Add(consultant);
-            await _context.SaveChangesAsync();
+
+            // Création d'un nouvel utilisateur avec le rôle "consultant"
+           
+            var password = "123456789";
+
+            // Utilisation du gestionnaire de mots de passe pour hacher le mot de passe
+            var existingEmailUser = await _userManager.FindByEmailAsync(consultant.Mail);
+            if (existingEmailUser != null)
+            {
+                return BadRequest("Email already exists.");
+            }
+
+
+
+            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = "consultant" };
+            var result = await _userManager.CreateAsync(user, password);
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { Errors = errors });
+            }
+
+
 
             return CreatedAtAction("GetConsultant", new { id = consultant.Id }, consultant);
         }
+
+
+
 
         // DELETE: api/Consultants/5
         [HttpDelete("{id}")]
