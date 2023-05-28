@@ -166,6 +166,57 @@ namespace Accompany_consulting.Migrations
                     b.ToTable("entretien");
                 });
 
+            modelBuilder.Entity("Accompany_consulting.Models.Mission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChargeC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChargeRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Consultant")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FeedbackManager")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Manager")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NoteManager")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RelationClientC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RelationClientRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SatisficationC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SatisficationRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("titre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mission");
+                });
+
             modelBuilder.Entity("Accompany_consulting.Models.User", b =>
                 {
                     b.Property<int>("Id")

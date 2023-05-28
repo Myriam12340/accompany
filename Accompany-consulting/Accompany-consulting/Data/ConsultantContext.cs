@@ -20,6 +20,7 @@ namespace Accompany_consulting.Data
         public DbSet<Candidat> candidat { get; set; }
         public DbSet<Entretient> entretien { get; set; }
 
+  public DbSet<Mission> Mission { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,5 +32,8 @@ namespace Accompany_consulting.Data
             // Configure other properties and relationships for User entity
 
         }
+
+
+      
     }
 }
