@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230530163932_evaluation")]
+    partial class evaluation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,84 +166,6 @@ namespace Accompany_consulting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("entretien");
-                });
-
-            modelBuilder.Entity("Accompany_consulting.Models.Evaluation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AdmC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdmRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CommunicationC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommunicationInterne")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CommunicationRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date_evaluation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DevCommercialC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DevCommercialRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EspritEquipeC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EspritEquipeRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Formation")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Hr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Outils")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProcessRH")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProcessusR")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProjetInterneC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjetInterneRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Pt24")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rapport")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Relation")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VieCabinetC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VieCabinetRH")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Evaluation");
                 });
 
             modelBuilder.Entity("Accompany_consulting.Models.Mission", b =>
