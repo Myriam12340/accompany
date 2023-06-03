@@ -78,6 +78,7 @@ namespace Accompany_consulting.Controllers
         [HttpPost]
         public async Task<ActionResult<Evaluation>> PostEvaluation(Evaluation evaluation)
         {
+            evaluation.Date_evaluation = DateTime.Now; // Set the Date_evaluation to the current system date
             _context.Evaluation.Add(evaluation);
             await _context.SaveChangesAsync();
 
