@@ -105,5 +105,18 @@ namespace Accompany_consulting.Controllers
         {
             return _context.Evaluation.Any(e => e.Id == id);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

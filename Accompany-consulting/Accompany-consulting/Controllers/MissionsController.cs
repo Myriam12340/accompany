@@ -21,7 +21,7 @@ namespace Accompany_consulting.Controllers
             _context = context;
         }
 
-        // GET: api/Missions
+        // GET: api/Missions/
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMission()
         {
@@ -103,6 +103,15 @@ namespace Accompany_consulting.Controllers
         private bool MissionExists(int id)
         {
             return _context.Mission.Any(e => e.Id == id);
+        }
+
+
+        //get list evaluation evaluation  a faire 
+        [HttpGet("manager/{manager}")]
+        public async Task<List<Mission>> GetmissionsBymanager(int manager)
+        {
+            var missions = await _context.Mission.Where(e => e.Manager == manager).ToListAsync();
+            return missions;
         }
     }
 }
