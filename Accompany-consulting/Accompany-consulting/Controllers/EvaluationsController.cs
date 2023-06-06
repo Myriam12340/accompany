@@ -106,9 +106,46 @@ namespace Accompany_consulting.Controllers
             return _context.Evaluation.Any(e => e.Id == id);
         }
 
+        [HttpGet("hr/{id}")]
+        public async Task<ActionResult<double>> GetHRByEvaluationId(int id)
+        {
+            var evaluation = await _context.Evaluation.FindAsync(id);
+
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
+
+            var hrValue = evaluation.Hr; // Assuming the field name is "Hr" in the Evaluation model and it's of type double.
+
+            return Ok(hrValue);
+        }
 
 
 
+        [HttpGet("email/{evaluationId}")]
+        public async Task<ActionResult<string>> GetUserEmailByEvaluationId(int evaluationId)
+        {
+            var evaluation = await _context.Evaluation.FindAsync(evaluationId);
+
+            if (evaluation == null)
+            {
+                return NotFound("Evaluation not found");
+            }
+
+            var userId = evaluation.Hr; // Assuming the foreign key to the User table is named "UserId" in the Evaluation model.
+
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var userEmail = user.Email;
+
+            return Ok(userEmail);
+        }
 
 
 

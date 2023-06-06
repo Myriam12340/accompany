@@ -173,6 +173,26 @@ namespace Accompany_consulting.Controllers
         }
 
 
+        // ...
+
+        [HttpGet("mailuser/{id}")]
+        public async Task<ActionResult<string>> GetUserEmailByIdAsync(string id)
+        {
+            if (!int.TryParse(id, out int userId))
+            {
+                return BadRequest("Invalid user ID");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            return user.Email;
+        }
+
+        // ...
 
 
 

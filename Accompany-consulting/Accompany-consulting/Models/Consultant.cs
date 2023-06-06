@@ -53,5 +53,6 @@ namespace Accompany_consulting.Models
         public string genre { get; set; }   
         public string code { get; set; }
         public string situation_amoureuse { get; set; }
+        public int salaire { get; set; }
     }
 }

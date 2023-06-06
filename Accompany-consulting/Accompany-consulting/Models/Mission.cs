@@ -21,6 +21,10 @@ namespace Accompany_consulting.Models
         public string SatisficationC { get; set; }
         public int? NoteManager { get; set; }
         public string? FeedbackManager { get; set; }
+
+
+        [ForeignKey("Evaluationid")]
+        public int evaluation { get; set; }
     }
 
 }

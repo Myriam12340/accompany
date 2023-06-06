@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230605152840_evaluationcompetance")]
+    partial class evaluationcompetance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,9 +123,6 @@ namespace Accompany_consulting.Migrations
 
                     b.Property<string>("genre")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("salaire")
-                        .HasColumnType("int");
 
                     b.Property<string>("situation_amoureuse")
                         .HasColumnType("nvarchar(max)");
@@ -366,39 +365,6 @@ namespace Accompany_consulting.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Accompany_consulting.Models.eval_competance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date_evaluation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Hr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("consultant")
-                        .HasColumnType("int");
-
-                    b.Property<string>("contrat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("decision")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("notefinal")
-                        .HasColumnType("int");
-
-                    b.Property<int>("notemissions")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("eval_competance");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

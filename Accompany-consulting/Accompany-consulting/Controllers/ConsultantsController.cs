@@ -138,5 +138,40 @@ namespace Accompany_consulting.Controllers
         {
             return _context.Consultants.Any(e => e.Id == id);
         }
+        // PUT: api/Consultants/5/contract
+        [HttpPut("contract/{id}")]
+        public async Task<IActionResult> UpdateContract(int id, string newContract)
+
+        {
+            var consultant = await _context.Consultants.FindAsync(id);
+            if (consultant == null)
+            {
+                return NotFound();
+            }
+
+            consultant.Contrat = newContract;
+            _context.Entry(consultant).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ConsultantExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
+
     }
 }

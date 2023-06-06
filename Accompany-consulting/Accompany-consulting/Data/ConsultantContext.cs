@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Accompany_consulting.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Accompany_consulting.Migrations;
 
 namespace Accompany_consulting.Data
 {
@@ -22,7 +23,7 @@ namespace Accompany_consulting.Data
 
   public DbSet<Mission> Mission { get; set; }
   public DbSet<Evaluation> Evaluation { get; set; }
-
+        public DbSet<eval_competance> eval_competance { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -33,6 +34,8 @@ namespace Accompany_consulting.Data
             // Configure other properties and relationships for User entity
 
         }
+
+       
 
 
 

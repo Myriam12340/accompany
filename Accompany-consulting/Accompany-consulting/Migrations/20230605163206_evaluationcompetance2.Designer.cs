@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230605163206_evaluationcompetance2")]
+    partial class evaluationcompetance2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,9 +123,6 @@ namespace Accompany_consulting.Migrations
 
                     b.Property<string>("genre")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("salaire")
-                        .HasColumnType("int");
 
                     b.Property<string>("situation_amoureuse")
                         .HasColumnType("nvarchar(max)");

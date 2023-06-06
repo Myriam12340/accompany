@@ -113,5 +113,22 @@ namespace Accompany_consulting.Controllers
             var missions = await _context.Mission.Where(e => e.Manager == manager).ToListAsync();
             return missions;
         }
+
+        [HttpGet("consultant/{consultantId}")]
+        public async Task<ActionResult<IEnumerable<Mission>>> GetMissionsByConsultant(int consultantId)
+        {
+            var missions = await _context.Mission.Where(m => m.Consultant == consultantId).ToListAsync();
+
+            if (missions == null || missions.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return missions;
+        }
+
+
     }
+
+
 }
