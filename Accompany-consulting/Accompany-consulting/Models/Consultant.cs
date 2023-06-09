@@ -54,5 +54,7 @@ namespace Accompany_consulting.Models
         public string code { get; set; }
         public string situation_amoureuse { get; set; }
         public int salaire { get; set; }
+        public int SoldeConge { get; set; }
+        public int SoldeMaladie { get; set; }
     }
 }

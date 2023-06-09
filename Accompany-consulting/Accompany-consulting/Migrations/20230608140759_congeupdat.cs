@@ -1,0 +1,35 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Accompany_consulting.Migrations
+{
+    public partial class congeupdat : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "Conge",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Demandeur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Validateur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateDebut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateFin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateDemande = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Conge", x => x.Id);
+                });
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Conge");
+        }
+    }
+}

@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230608102607_eval_integration")]
+    partial class eval_integration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,39 +63,6 @@ namespace Accompany_consulting.Migrations
                     b.ToTable("candidat");
                 });
 
-            modelBuilder.Entity("Accompany_consulting.Models.Conge", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateDebut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDemande")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateFin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Demandeur")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Validateur")
-                        .HasColumnType("int");
-
-                    b.Property<string>("etat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Conge");
-                });
-
             modelBuilder.Entity("Accompany_consulting.Models.Consultant", b =>
                 {
                     b.Property<int>("Id")
@@ -136,12 +105,6 @@ namespace Accompany_consulting.Migrations
 
                     b.Property<string>("Societe")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SoldeConge")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoldeMaladie")
-                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");

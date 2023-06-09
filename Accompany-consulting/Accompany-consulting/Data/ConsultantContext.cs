@@ -24,7 +24,8 @@ namespace Accompany_consulting.Data
   public DbSet<Mission> Mission { get; set; }
   public DbSet<Evaluation> Evaluation { get; set; }
         public DbSet<eval_competance> eval_competance { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+           public DbSet<Conge> Conge { get; set; }
+     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 

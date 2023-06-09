@@ -11,6 +11,8 @@ namespace Accompany_consulting.Models
 
         [ForeignKey("hr_id")]
         public int Hr { get; set; }
+        [ForeignKey("consultant_id")]
+        public int consultant { get; set; }
         public int? ProcessusR { get; set; }
         public int? CommunicationInterne { get; set; }
         public int? Relation { get; set; }

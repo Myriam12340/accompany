@@ -1,4 +1,5 @@
 ﻿using Accompany_consulting.Data;
+using Accompany_consulting.Migrations;
 using Accompany_consulting.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -87,6 +88,9 @@ namespace Accompany_consulting.Controllers
         [HttpPost]
         public async Task<ActionResult<Consultant>> PostConsultant(Consultant consultant)
         {
+            consultant.SoldeConge = 2;
+            consultant.SoldeMaladie = 3;
+
             _context.Consultants.Add(consultant);
 
             // Création d'un nouvel utilisateur avec le rôle "consultant"
@@ -172,6 +176,18 @@ namespace Accompany_consulting.Controllers
         }
 
 
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<Consultant>> GetConsultantByEmail(string email)
+        {
+            var consultant = await _context.Consultants.FirstOrDefaultAsync(c => c.Mail == email);
+
+            if (consultant == null)
+            {
+                return NotFound(); // Renvoie une réponse 404 si le consultant n'est pas trouvé
+            }
+
+            return Ok(consultant); // Renvoie le consultant trouvé avec une réponse 200
+        }
 
     }
 }
