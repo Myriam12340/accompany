@@ -106,5 +106,46 @@ namespace Accompany_consulting.Controllers
         {
             return _context.Conge.Any(e => e.Id == id);
         }
+
+
+        // GET: api/Conges/GetCongeParDemandeur/5
+        [HttpGet("GetCongeParDemandeur/{demandeurId}")]
+        public async Task<ActionResult<IEnumerable<Conge>>> GetCongeParDemandeur(int demandeurId)
+        {
+            var conges = await _context.Conge.Where(c => c.Demandeur == demandeurId).ToListAsync();
+
+            if (conges == null)
+            {
+                return NotFound();
+            }
+
+            return conges;
+        }
+
+        [HttpPut("etat/{id}/{etatmodifier}")]
+        public IActionResult UpdateCongeEtat(int id,  string etatmodifier)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var conge = _context.Conge.FirstOrDefault(c => c.Id == id);
+
+            // If the congé is not found, return a not found response
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            conge.etat = etatmodifier;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
+
+
+
+
     }
 }
