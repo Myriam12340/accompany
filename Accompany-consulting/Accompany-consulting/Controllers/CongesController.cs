@@ -121,6 +121,22 @@ namespace Accompany_consulting.Controllers
 
             return conges;
         }
+        // GET: api/Conges/GetCongeParValidateur/5
+        [HttpGet("GetCongeParValidateur/{validateurId}")]
+        public async Task<ActionResult<IEnumerable<Conge>>> GetCongeParValidateur(int validateurId)
+        {
+            var conges = await _context.Conge.Where(c => c.Validateur == validateurId).ToListAsync();
+
+            if (conges == null)
+            {
+                return NotFound();
+            }
+
+            return conges;
+        }
+
+
+
 
         [HttpPut("etat/{id}/{etatmodifier}")]
         public IActionResult UpdateCongeEtat(int id,  string etatmodifier)
