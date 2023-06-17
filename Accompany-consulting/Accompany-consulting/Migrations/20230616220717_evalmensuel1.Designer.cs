@@ -4,14 +4,16 @@ using Accompany_consulting.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Accompany_consulting.Migrations
 {
     [DbContext(typeof(ConsultantContext))]
-    partial class ConsultantContextModelSnapshot : ModelSnapshot
+    [Migration("20230616220717_evalmensuel1")]
+    partial class evalmensuel1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,10 +328,43 @@ namespace Accompany_consulting.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ChargeC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChargeRH")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Consultant")
                         .HasColumnType("int");
 
+                    b.Property<string>("FeedbackManager")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Manager")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NoteManager")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RelationClientC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RelationClientRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SatisficationC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SatisficationRH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("evaluation")
                         .HasColumnType("int");
 
                     b.Property<string>("titre")
@@ -410,9 +445,6 @@ namespace Accompany_consulting.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Budge")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Consultant")
                         .HasColumnType("int");

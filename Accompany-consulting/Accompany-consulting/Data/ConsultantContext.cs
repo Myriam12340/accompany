@@ -25,6 +25,7 @@ namespace Accompany_consulting.Data
   public DbSet<Evaluation> Evaluation { get; set; }
         public DbSet<eval_competance> eval_competance { get; set; }
            public DbSet<Conge> Conge { get; set; }
+        public DbSet<eval_mission_integration>eval_Mission_Integrations { get; set; }
      protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -35,6 +36,7 @@ namespace Accompany_consulting.Data
             // Configure other properties and relationships for User entity
 
         }
+     public DbSet<eval__mensuel> eval__mensuel { get; set; }
 
        
 

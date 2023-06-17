@@ -143,7 +143,7 @@ namespace Accompany_consulting.Controllers
             return _context.Consultants.Any(e => e.Id == id);
         }
         // PUT: api/Consultants/5/contract
-        [HttpPut("contract/{id}")]
+        [HttpPut("contract/{id}/{newcontrat}")]
         public async Task<IActionResult> UpdateContract(int id, string newContract)
 
         {
@@ -188,6 +188,43 @@ namespace Accompany_consulting.Controllers
 
             return Ok(consultant); // Renvoie le consultant trouvé avec une réponse 200
         }
+
+
+
+
+
+        [HttpPut("etat/{id}/{etatmodifier}")]
+        public IActionResult UpdateContrat(int id, string etatmodifier)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var conge = _context.Consultants.FirstOrDefault(c => c.Id == id);
+
+            // If the congé is not found, return a not found response
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            conge.Contrat = etatmodifier;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

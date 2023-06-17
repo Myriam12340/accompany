@@ -114,6 +114,15 @@ namespace Accompany_consulting.Controllers
             return missions;
         }
 
+
+
+        [HttpGet("titre/{titre}")]
+        public async Task<List<Mission>> GetmissionsBytitre(string titre)
+        {
+            var missions = await _context.Mission.Where(e => e.titre == titre).ToListAsync();
+            return missions;
+        }
+
         [HttpGet("consultant/{consultantId}")]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMissionsByConsultant(int consultantId)
         {
