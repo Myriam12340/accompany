@@ -496,7 +496,6 @@ C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accomp
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\Accompany-consulting.dll
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\Accompany-consulting.pdb
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\Accompany-consulting.Views.dll
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\Accompany-consulting.Views.pdb
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\BouncyCastle.Cryptography.dll
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\bin\Debug\net5.0\MailKit.dll
@@ -624,8 +623,6 @@ C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accomp
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.AssemblyInfo.cs
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.csproj.CoreCompileInputs.cache
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.RazorAssemblyInfo.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.RazorAssemblyInfo.cs
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\scopedcss\bundle\Accompany-consulting.styles.css
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\staticwebassets\Accompany-consulting.StaticWebAssets.Manifest.cache
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\staticwebassets\Accompany-consulting.StaticWebAssets.Pack.cache
@@ -633,19 +630,7 @@ C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accomp
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\staticwebassets\msbuild.build.Accompany-consulting.props
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Accompany-consulting.props
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Accompany-consulting.props
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.TagHelpers.input.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.TagHelpers.output.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.RazorCoreGenerate.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Razor\Pages\_ViewStart.cshtml.g.cs
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.RazorTargetAssemblyInfo.cache
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.RazorTargetAssemblyInfo.cs
-C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.Views.pdb
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.csproj.CopyComplete
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\Accompany-consulting.dll
 C:\Users\Maaroufi\Desktop\pfe_project\back\accompany\Accompany-consulting\Accompany-consulting\obj\Debug\net5.0\refint\Accompany-consulting.dll

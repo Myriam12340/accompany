@@ -1,11 +1,13 @@
 ﻿using Accompany_consulting.Data;
 using Accompany_consulting.Migrations;
 using Accompany_consulting.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -299,6 +301,57 @@ namespace Accompany_consulting.Controllers
 
             // Return a success response
             return Ok();
+        }
+
+
+        //partie photo 
+
+
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine("image", fileName); // Assurez-vous que le dossier "pdf" existe
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return Ok(new { FileUrl = fileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+
+        [HttpGet("download-pdf")]
+        public IActionResult DownloadPdf(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return BadRequest("File name is required.");
+            }
+
+            var filePath = Path.Combine("image", fileName); // Assurez-vous que le chemin est correct
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("File not found.");
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/image", fileName);
         }
 
 
