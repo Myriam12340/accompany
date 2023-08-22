@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+
 namespace Accompany_consulting.Controllers
 {
     [ApiController]
@@ -195,9 +197,37 @@ namespace Accompany_consulting.Controllers
 
         // ...
 
+        [HttpPut("update-password/{id}")]
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto model, string id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+            if (!changePasswordResult.Succeeded)
+            {
+                var errors = changePasswordResult.Errors.Select(e => e.Description);
+                return BadRequest(new { Errors = errors });
+            }
+
+            return Ok();
+        }
 
 
 
 
     }
+}
+public class UpdatePasswordDto
+{
+    [Required]
+    public string CurrentPassword { get; set; }
+
+    [Required]
+    public string NewPassword { get; set; }
 }
