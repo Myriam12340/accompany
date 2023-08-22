@@ -148,8 +148,14 @@ namespace Accompany_consulting.Controllers
         }
 
 
+        [HttpGet("hasEvaluation/{consultantId}")]
+        public async Task<ActionResult<int>> GetHasEvaluation(int consultantId)
+        {
+            var hasEvaluationCount = await _context.Evaluation
+                .CountAsync(e => e.consultant == consultantId);
 
-
+            return hasEvaluationCount;
+        }
 
 
 

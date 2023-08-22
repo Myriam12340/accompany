@@ -29,7 +29,7 @@
         [MaxLength(200)]
         public string Competance { get; set; }
 
-        public byte[] CvPdf { get; set; }
+        public string CvPdfUrl { get; set; } // Champ pour stocker l'URL du fichier PDF
 
 
 

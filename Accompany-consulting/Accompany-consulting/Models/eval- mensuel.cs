@@ -14,11 +14,13 @@ namespace Accompany_consulting.Models
         [ForeignKey("MissionId")]
         public int Mission { get; set; }
 
-        public string Qualité { get; set; }
-        public string Délai { get; set; }
-        public string périmètre { get; set; }
+        public string Qualite { get; set; }
+        public string Delai { get; set; }
+        public string perimetre { get; set; }
 
         public string Budge { get; set; }
+
+        public int nbeval { get; set; } 
 
     }
 }

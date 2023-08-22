@@ -18,59 +18,61 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 using Microsoft.AspNet.Identity;
-
-namespace Accompany_consulting
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddRazorPages();
+        services.AddHostedService<MiseAJourSoldeService>();
+        services.AddHostedService<MiseAJourSoldeMaladieService>();
+
+
+        services.AddDbContext<ConsultantContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ConsultantContext")),
+            ServiceLifetime.Scoped);
+
+
+
+        services.AddIdentity<User, IdentityRole<int>>(options =>
         {
-            Configuration = configuration;
-        }
+            // Configure password options
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireLowercase = false;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+            options.Lockout.MaxFailedAccessAttempts = 10;
+            options.Lockout.AllowedForNewUsers = true;
+        })
+        .AddEntityFrameworkStores<ConsultantContext>()
+        .AddDefaultTokenProviders()
+        .AddRoles<IdentityRole<int>>(); // Ajoute la gestion des rôles
 
-        public IConfiguration Configuration { get; }
+        // Configure other services
+        services.AddControllersWithViews();
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+
+        services.AddCors(options =>
         {
-            services.AddRazorPages();
+            options.AddPolicy("CorsPolicy", builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+        });
 
-            services.AddDbContext<ConsultantContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ConsultantContext")),
-                ServiceLifetime.Scoped);
-
-            services.AddIdentity<User, IdentityRole<int>>()
-                .AddEntityFrameworkStores<ConsultantContext>()
-                .AddDefaultTokenProviders();
-
-            // Configure authentication options
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.AllowedForNewUsers = true;
-            });
-
-            services.AddControllersWithViews();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder => builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
         .AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
@@ -85,43 +87,98 @@ namespace Accompany_consulting
             };
         });
 
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AllAccess", policy =>
-                {
-                    policy.RequireAuthenticatedUser();
-                });
-            });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        services.AddAuthorization(options =>
         {
-            if (env.IsDevelopment())
+            options.AddPolicy("AllAccess", policy =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseCors("CorsPolicy");
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
+                policy.RequireAuthenticatedUser();
             });
-        }
+        });
+
+
     }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+        }
+
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseCors("CorsPolicy");
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages();
+            endpoints.MapControllers();
+        });
+
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+            var roleManager = serviceScope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<IdentityRole<int>>>();
+
+            var roleManager1 = serviceScope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<IdentityRole<int>>>();
+            var roleManager2 = serviceScope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<IdentityRole<int>>>();
+
+            if (!roleManager.RoleExistsAsync("Manager").Result)
+            {
+                // Ajouter le rôle "Manager" s'il n'existe pas
+                var role = new IdentityRole<int>
+                {
+                    Name = "Manager"
+                };
+                var result = roleManager.CreateAsync(role).Result;
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Erreur lors de la création du rôle Manager.");
+                }
+            }
+
+
+            if (!roleManager1.RoleExistsAsync("Admin").Result)
+            {
+                // Ajouter le rôle "Manager" s'il n'existe pas
+                var role = new IdentityRole<int>
+                {
+                    Name = "Admin"
+                };
+                var result = roleManager1.CreateAsync(role).Result;
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Erreur lors de la création du rôle Admin.");
+                }
+            }
+
+            if (!roleManager2.RoleExistsAsync("Consultant").Result)
+            {
+                // Ajouter le rôle "Manager" s'il n'existe pas
+                var role = new IdentityRole<int>
+                {
+                    Name = "Consultant"
+                };
+                var result = roleManager2.CreateAsync(role).Result;
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Erreur lors de la création du rôle Consultant.");
+                }
+            }
+        }
+    
+
+}
 }

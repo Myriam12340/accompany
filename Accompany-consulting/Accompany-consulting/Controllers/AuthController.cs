@@ -109,6 +109,7 @@ namespace Accompany_consulting.Controllers
                 user.Id,
                 user.Email,
                 user.UserName,
+                user.Role,
                 // Add here any additional profile information needed for your app
             });
         }

@@ -30,8 +30,8 @@ namespace Accompany_consulting.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<byte[]>("CvPdf")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("CvPdfUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -86,6 +86,12 @@ namespace Accompany_consulting.Migrations
                     b.Property<int>("Validateur")
                         .HasColumnType("int");
 
+                    b.Property<string>("certif")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("duree")
+                        .HasColumnType("float");
+
                     b.Property<string>("etat")
                         .HasColumnType("nvarchar(max)");
 
@@ -137,11 +143,11 @@ namespace Accompany_consulting.Migrations
                     b.Property<string>("Societe")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SoldeConge")
-                        .HasColumnType("int");
+                    b.Property<double>("SoldeConge")
+                        .HasColumnType("float");
 
-                    b.Property<int>("SoldeMaladie")
-                        .HasColumnType("int");
+                    b.Property<double>("SoldeMaladie")
+                        .HasColumnType("float");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -198,6 +204,9 @@ namespace Accompany_consulting.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Statut")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("traite")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("valid")
@@ -329,7 +338,16 @@ namespace Accompany_consulting.Migrations
                     b.Property<int>("Consultant")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Date_debut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date_fin")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Manager")
+                        .HasColumnType("int");
+
+                    b.Property<int>("nbeval")
                         .HasColumnType("int");
 
                     b.Property<string>("titre")
@@ -417,7 +435,7 @@ namespace Accompany_consulting.Migrations
                     b.Property<int>("Consultant")
                         .HasColumnType("int");
 
-                    b.Property<string>("Délai")
+                    b.Property<string>("Delai")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Manager")
@@ -426,10 +444,13 @@ namespace Accompany_consulting.Migrations
                     b.Property<int>("Mission")
                         .HasColumnType("int");
 
-                    b.Property<string>("Qualité")
+                    b.Property<string>("Qualite")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("périmètre")
+                    b.Property<int>("nbeval")
+                        .HasColumnType("int");
+
+                    b.Property<string>("perimetre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

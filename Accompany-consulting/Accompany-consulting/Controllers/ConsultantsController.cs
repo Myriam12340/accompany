@@ -94,8 +94,8 @@ namespace Accompany_consulting.Controllers
             _context.Consultants.Add(consultant);
 
             // Création d'un nouvel utilisateur avec le rôle "consultant"
-           
-            var password = "123456789";
+
+            var password = "accompany" + consultant.Nom+consultant.Cin;
 
             // Utilisation du gestionnaire de mots de passe pour hacher le mot de passe
             var existingEmailUser = await _userManager.FindByEmailAsync(consultant.Mail);
@@ -105,8 +105,8 @@ namespace Accompany_consulting.Controllers
             }
 
 
-
-            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = "consultant" };
+            var role = consultant.Grade;
+            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = consultant.Grade};
             var result = await _userManager.CreateAsync(user, password);
             if (!result.Succeeded)
             {
@@ -118,6 +118,43 @@ namespace Accompany_consulting.Controllers
 
             return CreatedAtAction("GetConsultant", new { id = consultant.Id }, consultant);
         }
+
+
+
+
+        [HttpPost("admin")]
+        public async Task<ActionResult<Consultant>> Postadmin(Consultant consultant)
+        {
+
+
+            _context.Consultants.Add(consultant);
+
+            // Création d'un nouvel utilisateur avec le rôle "consultant"
+
+            var password = "accompany" + consultant.Nom + consultant.Cin;
+
+            // Utilisation du gestionnaire de mots de passe pour hacher le mot de passe
+            var existingEmailUser = await _userManager.FindByEmailAsync(consultant.Mail);
+            if (existingEmailUser != null)
+            {
+                return BadRequest("Email already exists.");
+            }
+
+
+            var role = "admin";
+            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = role };
+            var result = await _userManager.CreateAsync(user, password);
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { Errors = errors });
+            }
+
+
+
+            return CreatedAtAction("GetConsultant", new { id = consultant.Id }, consultant);
+        }
+
 
 
 
@@ -218,10 +255,51 @@ namespace Accompany_consulting.Controllers
 
 
 
+        [HttpPut("solde/{id}/{soldemodifier}")]
+        public IActionResult Updateslde(int id, double soldemodifier)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var solde = _context.Consultants.FirstOrDefault(c => c.Id == id);
+
+            // If the congé is not found, return a not found response
+            if (solde == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            solde.SoldeConge = soldemodifier;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
 
 
 
+        [HttpPut("soldemaladie/{id}/{soldemaladiemodifier}")]
+        public IActionResult Updatesldemaladie(int id, float soldemaladiemodifier)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var solde = _context.Consultants.FirstOrDefault(c => c.Id == id);
 
+            // If the congé is not found, return a not found response
+            if (solde == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            solde.SoldeMaladie = soldemaladiemodifier;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
 
 
 

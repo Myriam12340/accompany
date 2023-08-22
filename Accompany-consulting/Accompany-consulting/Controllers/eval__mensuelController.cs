@@ -104,5 +104,42 @@ namespace Accompany_consulting.Controllers
         {
             return _context.eval__mensuel.Any(e => e.Id == id);
         }
+
+
+        [HttpGet("mission/{missionId}/consultant/{consultantId}")]
+        public async Task<ActionResult<List<eval__mensuel>>> GetEvaluationsByMissionAndConsultant(int missionId, int consultantId)
+        {
+            var evaluations = await _context.eval__mensuel
+                .Where(e => e.Mission == missionId && e.Consultant == consultantId)
+                .ToListAsync();
+
+            return evaluations;
+        }
+        [HttpGet("consultantEVL/{consultantId}")]
+        public async Task<ActionResult<List<eval__mensuel>>> GetEvaluationsByConsultant(int consultantId)
+        {
+            var evaluations = await _context.eval__mensuel
+                .Where(e => e.Consultant == consultantId)
+                .ToListAsync();
+
+            return evaluations;
+        }
+
+
+        [HttpGet("consultant-ids-with-evals")]
+public async Task<ActionResult<List<int>>> GetConsultantIdsWithEvaluations()
+{
+    var consultantIdsWithEvals = await _context.eval__mensuel
+        .Select(e => e.Consultant)
+        .Distinct()
+        .ToListAsync();
+
+    return consultantIdsWithEvals;
+}
+
+      
+
+
+
     }
 }

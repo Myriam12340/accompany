@@ -21,6 +21,8 @@ namespace Accompany_consulting.Controllers
             _context = context;
         }
 
+        
+
         // GET: api/Missions/
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMission()

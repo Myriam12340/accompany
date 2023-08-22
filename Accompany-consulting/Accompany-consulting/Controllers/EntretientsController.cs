@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Accompany_consulting.Data;
 using Accompany_consulting.Models;
+using System.IO;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Accompany_consulting.Controllers
 {
@@ -20,6 +22,30 @@ namespace Accompany_consulting.Controllers
         {
             _context = context;
         }
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //get historique entretien
         [HttpGet("recruteur/{recruteur}")]
         public async Task<List<Entretient>> GetEntretientsByRecruteur(int recruteur)
@@ -43,6 +69,22 @@ namespace Accompany_consulting.Controllers
         {
             var entretients = await _context.entretien.Where(e => e.Candidat == candidat).ToListAsync();
             return entretients;
+        }
+
+
+        //get candidat 
+
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<Candidat>> GetCandidatByEmail(string email)
+        {
+            var candidat = await _context.candidat.FirstOrDefaultAsync(c => c.Email == email);
+
+            if (candidat == null)
+            {
+                return NotFound(); 
+            }
+
+            return Ok(candidat); 
         }
 
 
@@ -122,7 +164,13 @@ namespace Accompany_consulting.Controllers
                 return BadRequest("Invalid request body");
             }
 
-            // add the Candidat and Entretient objects to the database
+            if (viewModel.Candidat == null)
+            {
+                return BadRequest("Candidat information is missing");
+            }
+
+            // Convert the base64 string to byte array
+        
             _context.candidat.Add(viewModel.Candidat);
             await _context.SaveChangesAsync(); // save changes to generate ID for Candidat
 
@@ -175,6 +223,51 @@ namespace Accompany_consulting.Controllers
 
 
 
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine("pdf", fileName); // Assurez-vous que le dossier "pdf" existe
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return Ok(new { FileUrl = fileName });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+
+        [HttpGet("download-pdf")]
+        public IActionResult DownloadPdf(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return BadRequest("File name is required.");
+            }
+
+            var filePath = Path.Combine("pdf", fileName); // Assurez-vous que le chemin est correct
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("File not found.");
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/pdf", fileName);
+        }
 
 
 
@@ -188,6 +281,7 @@ namespace Accompany_consulting.Controllers
         {
             public Candidat Candidat { get; set; }
             public Entretient Entretient { get; set; }
+            public string CvPdf { get; set; } 
         }
     }
 }

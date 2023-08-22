@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Accompany_consulting.Models
 {
@@ -11,7 +13,18 @@ namespace Accompany_consulting.Models
         [ForeignKey("ManagerId")]
         public int Manager { get; set; }
         public string titre { get; set; }
-  
+
+
+        [DataType(DataType.Date)]
+        public DateTime Date_debut { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime Date_fin { get; set; }
+
+        public int nbeval { get; set; }
+
+        
+
     }
 
 }

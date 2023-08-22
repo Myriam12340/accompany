@@ -18,10 +18,17 @@ namespace Accompany_consulting.Models
         public DateTime DateFin { get; set; }
         public string Type { get; set; }
         [DataType(DataType.Date)]
+
         public DateTime DateDemande { get; set; }
 
         public string etat { get; set; } 
-      
+
+        public double duree { get; set; }
+
+
+        public string certif { get; set; } // Champ pour stocker l'URL du fichier PDF
+
+
     }
 
 }

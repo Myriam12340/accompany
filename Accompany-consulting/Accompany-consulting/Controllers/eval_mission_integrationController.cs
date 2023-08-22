@@ -156,5 +156,17 @@ namespace Accompany_consulting.Controllers
             return evalMissionIntegrations;
         }
 
+
+
+        [HttpGet("list/{consultantId}/evaluation/{evaluationId}")]
+        public async Task<ActionResult<List<eval_mission_integration>>> GetEvalByConsultantAndEvaluation(int consultantId, int evaluationId)
+        {
+            var evalMissionIntegrations = await _context.eval_Mission_Integrations
+                .Where(eval => eval.Consultant == consultantId && eval.evaluation == evaluationId)
+                .ToListAsync();
+
+
+            return evalMissionIntegrations;
+        }
     }
 }

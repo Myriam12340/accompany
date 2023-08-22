@@ -112,5 +112,30 @@ namespace Accompany_consulting.Controllers
         {
             return _context.eval_competance.Any(e => e.Id == id);
         }
+
+        [HttpGet("hasEvaluation/{consultantId}")]
+        public async Task<ActionResult<bool>> GetHasEvaluation(int consultantId)
+        {
+            var hasEvaluation = await _context.eval_competance.AnyAsync(e => e.consultant == consultantId);
+
+            return hasEvaluation;
+        }
+
+
+
+        [HttpGet("consultant/{consultantId}")]
+        public async Task<ActionResult<List<eval_competance>>> GetEvaluationsByMissionAndConsultant( int consultantId)
+        {
+            var evaluations = await _context.eval_competance
+                .Where(e => e.consultant == consultantId)
+                .ToListAsync();
+
+            return evaluations;
+        }
+
+
+
+
+
     }
 }

@@ -24,5 +24,7 @@ namespace Accompany_consulting.Models
         [ForeignKey("candidatId")] // spécifier la clé étrangère correspondante
 
         public int Candidat { get; set; }
+
+        public string traite { get; set; }
     }
 }
