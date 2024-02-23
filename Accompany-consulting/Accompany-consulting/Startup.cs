@@ -31,13 +31,14 @@ public class Startup
     {
         services.AddRazorPages();
         services.AddHostedService<MiseAJourSoldeService>();
-        services.AddHostedService<MiseAJourSoldeMaladieService>();
 
+        services.AddHostedService<MiseAJourSoldeMaladieService>();
 
         services.AddDbContext<ConsultantContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ConsultantContext")),
             ServiceLifetime.Scoped);
 
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
 
 
         services.AddIdentity<User, IdentityRole<int>>(options =>

@@ -28,7 +28,7 @@ namespace Accompany_consulting.Models
 
         public string certif { get; set; } // Champ pour stocker l'URL du fichier PDF
 
-
+        public Boolean imprime { get; set; }
     }
 
 }

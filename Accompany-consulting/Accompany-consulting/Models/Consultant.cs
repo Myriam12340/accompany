@@ -40,6 +40,10 @@ namespace Accompany_consulting.Models
 
         public DateTime Date_naissance { get; set; }
 
+
+
+
+
         public int Age { get; set; }
         
         public string Cin { get; set; }
@@ -58,5 +62,7 @@ namespace Accompany_consulting.Models
         public double SoldeMaladie { get; set; }
         public string photo { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime Date_sortie { get; set; }
     }
 }

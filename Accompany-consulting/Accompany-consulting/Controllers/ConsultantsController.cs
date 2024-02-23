@@ -90,33 +90,49 @@ namespace Accompany_consulting.Controllers
         [HttpPost]
         public async Task<ActionResult<Consultant>> PostConsultant(Consultant consultant)
         {
-            consultant.SoldeConge = 2;
-            consultant.SoldeMaladie = 3;
+            // Vérification si le Cin existe déjà
+            var existingcinconsultant = await _context.Consultants.FirstOrDefaultAsync(c => c.Cin == consultant.Cin);
+            if (existingcinconsultant != null)
+            {
+                return BadRequest("Cin déjà existant.");
+            }
+
+            // Calcul de la différence entre la date d'intégration et la date actuelle en mois
 
             _context.Consultants.Add(consultant);
 
             // Création d'un nouvel utilisateur avec le rôle "consultant"
-
-            var password = "accompany" + consultant.Nom+consultant.Cin;
+            var password = "accompany" + consultant.Nom + consultant.Cin;
 
             // Utilisation du gestionnaire de mots de passe pour hacher le mot de passe
             var existingEmailUser = await _userManager.FindByEmailAsync(consultant.Mail);
             if (existingEmailUser != null)
             {
-                return BadRequest("Email already exists.");
+                return BadRequest("Email déjà existant.");
             }
 
+            var role = "";
+            if (new[] { "technical_Analyst", "developpeur", "consultant", "consultant_stagier" }.Contains(consultant.Grade.ToLower()))
+            {
+                role = "consultant";
+            }
+            else if (new[] { "product leader", "manager" }.Contains(consultant.Grade.ToLower()))
+            {
+                role = "manager";
+            }
+            else
+            {
+                role = "consultant";
+            }
 
-            var role = consultant.Grade;
-            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = consultant.Grade};
+            var user = new User { Email = consultant.Mail, UserName = consultant.Nom + consultant.Prenom, NormalizedEmail = consultant.Mail, Role = role };
             var result = await _userManager.CreateAsync(user, password);
+
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new { Errors = errors });
+                return BadRequest(errors);
             }
-
-
 
             return CreatedAtAction("GetConsultant", new { id = consultant.Id }, consultant);
         }
@@ -124,9 +140,21 @@ namespace Accompany_consulting.Controllers
 
 
 
+
+
+
+
+
+
+
         [HttpPost("admin")]
         public async Task<ActionResult<Consultant>> Postadmin(Consultant consultant)
         {
+
+            
+
+           
+
 
 
             _context.Consultants.Add(consultant);
@@ -255,6 +283,39 @@ namespace Accompany_consulting.Controllers
         }
 
 
+        [HttpPut("bonus/{id}/{soldemodifier}")]
+        public IActionResult Updatebonus(int id, double soldemodifier)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var solde = _context.Consultants.FirstOrDefault(c => c.Id == id);
+
+            // If the congé is not found, return a not found response
+            if (solde == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            solde.SoldeConge = solde.SoldeConge + soldemodifier;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         [HttpPut("solde/{id}/{soldemodifier}")]
@@ -270,7 +331,7 @@ namespace Accompany_consulting.Controllers
             }
 
             // Update the etat of the congé
-            solde.SoldeConge = soldemodifier;
+            solde.SoldeConge = solde.SoldeConge - soldemodifier;
 
             // Save the changes to the database
             _context.SaveChanges();
@@ -294,7 +355,7 @@ namespace Accompany_consulting.Controllers
             }
 
             // Update the etat of the congé
-            solde.SoldeMaladie = soldemaladiemodifier;
+            solde.SoldeMaladie = solde.SoldeMaladie - soldemaladiemodifier;
 
             // Save the changes to the database
             _context.SaveChanges();

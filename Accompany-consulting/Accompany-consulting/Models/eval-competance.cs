@@ -22,5 +22,9 @@ namespace Accompany_consulting.Models
         [ForeignKey("consultant_id")]
         public int consultant { get; set; }
 
+        public string commentaire { get; set; }
+
+        public string entreprise { get; set; }
+
     }
 }

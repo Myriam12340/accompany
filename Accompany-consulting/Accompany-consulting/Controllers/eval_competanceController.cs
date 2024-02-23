@@ -78,15 +78,31 @@ namespace Accompany_consulting.Controllers
         [HttpPost]
         public async Task<ActionResult<eval_competance>> Posteval_competance(eval_competance eval_competance)
         {
+            if (!ModelState.IsValid)
+            {
+                // Le modèle n'est pas valide, renvoyer un code 400 Bad Request avec les erreurs de validation.
+                return BadRequest(ModelState);
+            }
+
             eval_competance.Date_evaluation = DateTime.Now;
             _context.eval_competance.Add(eval_competance);
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Une exception de base de données s'est produite, vous pouvez la loguer ou la renvoyer en tant que réponse d'erreur.
+                return BadRequest("Une erreur s'est produite lors de la sauvegarde dans la base de données.");
+            }
 
             return CreatedAtAction("Geteval_competance", new { id = eval_competance.Id }, eval_competance);
         }
 
 
-        
+
+
 
 
 

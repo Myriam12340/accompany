@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Accompany_consulting.Data;
 
 namespace Accompany_consulting.Controllers
 {
@@ -23,12 +25,15 @@ namespace Accompany_consulting.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly ConsultantContext _context;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ConsultantContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _context = context;
+
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto model)
@@ -36,14 +41,9 @@ namespace Accompany_consulting.Controllers
             var existingEmailUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingEmailUser != null)
             {
-                return BadRequest("Email already exists.");
+                return BadRequest(" User existe déjà .");
             }
 
-            var existingUserNameUser = await _userManager.FindByNameAsync(model.UserName);
-            if (existingUserNameUser != null)
-            {
-                return BadRequest("Username already exists.");
-            }
 
             var user = new User { Email = model.Email, UserName = model.UserName, NormalizedEmail = model.Email, Role = model.Role };
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -65,6 +65,7 @@ namespace Accompany_consulting.Controllers
             {
                 return BadRequest("Invalid credentials");
             }
+
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
             if (!result.Succeeded)
             {
@@ -73,21 +74,30 @@ namespace Accompany_consulting.Controllers
 
             if (result.Succeeded)
             {
-                var token = new JwtSecurityToken(
-     issuer: "https://localhost:60734", // Mettez ici l'URL de votre serveur d'authentification
-     audience: "https://localhost:60734",
-     claims: new[]
-     {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-         // Ajoutez ici d'autres revendications personnalisées
-     },
-     expires: DateTime.UtcNow.AddMinutes(30),
-     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")), SecurityAlgorithms.HmacSha256)
- );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                var consultant = await _context.Consultants.FirstOrDefaultAsync(c => c.Mail == model.Email);
+                if (consultant != null && consultant.Status == "actif")
+                {
+                    var token = new JwtSecurityToken(
+                        issuer: "https://localhost:60734", // Mettez ici l'URL de votre serveur d'authentification
+                        audience: "https://localhost:60734",
+                        claims: new[]
+                        {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                            // Ajoutez ici d'autres revendications personnalisées
+                        },
+                        expires: DateTime.UtcNow.AddHours(24),
+                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")), SecurityAlgorithms.HmacSha256)
+                    );
 
-                return Ok(new { Token = tokenString });
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    return Ok(new { Token = tokenString , statut = consultant.Status });
+                }
+                else
+                {
+                    return StatusCode(403, "Consultant is not active");
+                }
             }
 
             return Unauthorized();

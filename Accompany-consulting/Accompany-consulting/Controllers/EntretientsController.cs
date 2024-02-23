@@ -87,6 +87,21 @@ namespace Accompany_consulting.Controllers
             return Ok(candidat); 
         }
 
+        [HttpGet("phone/{phone}")]
+        public async Task<ActionResult<Candidat>> GetCandidatByphoneOrPhoneNumber( string phone)
+        {
+            var candidat = await _context.candidat.FirstOrDefaultAsync(c =>
+              
+                c.Tel1 == phone ||
+                c.Tel2 == phone);
+
+            if (candidat == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(candidat);
+        }
 
 
         //get candidat 

@@ -212,7 +212,27 @@ namespace Accompany_consulting.Controllers
         }
 
 
+        [HttpPut("imprime/{id}/{imprime}")]
+        public IActionResult UpdateCongeimprime(int id,Boolean imprime)
+        {
+            // Retrieve the congé from the database based on the provided id
+            var conge = _context.Conge.FirstOrDefault(c => c.Id == id);
 
+            // If the congé is not found, return a not found response
+            if (conge == null)
+            {
+                return NotFound();
+            }
+
+            // Update the etat of the congé
+            conge.imprime = imprime;
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
 
     }
 }

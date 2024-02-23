@@ -1,49 +1,72 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Accompany_consulting.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Accompany_consulting.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Accompany_consulting.Models
 {
     public class MiseAJourSoldeMaladieService : BackgroundService
     {
         private readonly IServiceProvider _services;
+        private readonly ILogger<MiseAJourSoldeMaladieService> _logger;
+        private DateTime _derniereMiseAJour;
 
-        public MiseAJourSoldeMaladieService(IServiceProvider services)
+        public MiseAJourSoldeMaladieService(IServiceProvider services, ILogger<MiseAJourSoldeMaladieService> logger)
         {
             _services = services;
+            _logger = logger;
+            _derniereMiseAJour = DateTime.UtcNow;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _logger.LogInformation("Le service MiseAJourSoldeMaladieService démarre.");
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                using (var scope = _services.CreateScope())
+                var maintenant = DateTime.UtcNow;
+
+                if (maintenant.Year > _derniereMiseAJour.Year)
                 {
-                    var dbContext = scope.ServiceProvider.GetRequiredService<ConsultantContext>(); // Remplacez VotreDbContext par votre contexte de base de données
-
-                    var consultants = await dbContext.Consultants.ToListAsync();
-                    foreach (var consultant in consultants)
+                    using (var scope = _services.CreateScope())
                     {
-                        consultant.SoldeMaladie += 3; // Ajoutez la mise à jour du solde de maladie ici
-                    }
+                        var dbContext = scope.ServiceProvider.GetRequiredService<ConsultantContext>();
 
-                    await dbContext.SaveChangesAsync();
+                        var consultants = await dbContext.Consultants.ToListAsync();
+                        foreach (var consultant in consultants)
+                        {
+                            consultant.SoldeMaladie += 3;
+                        }
+
+                        await dbContext.SaveChangesAsync();
+
+                        _derniereMiseAJour = maintenant;
+
+                        _logger.LogInformation("SoldeMaladie mis à jour pour tous les consultants.");
+                    }
                 }
 
-                // Attendre jusqu'au 1er jour de l'année suivante
-                var now = DateTime.UtcNow;
-                var nextYear = now.AddYears(1);
-                var firstDayOfNextYear = new DateTime(nextYear.Year, 1, 1);
-                var delay = firstDayOfNextYear - now;
+                // Calculer le délai jusqu'à l'année suivante
+                var anneeSuivante = maintenant.AddYears(1);
+                var premierJourAnneeSuivante = new DateTime(anneeSuivante.Year, 1, 1);
+                var delai = premierJourAnneeSuivante - maintenant;
 
-                await Task.Delay(delay, stoppingToken);
+
+                
+
+
+
+                // Attendre jusqu'au premier jour de l'année suivante
+                await Task.Delay(delai.Seconds, stoppingToken);
+                // ...
+
             }
+
         }
     }
 }

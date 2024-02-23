@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bfJt1UM5nyiii045C1KXDXmbALmWt1KZ4RVUxn6MICAo1z9i7yQ6Doq2rJ2l3hs5pzeogI3hGhRZ9a57Bmzg5A==",
+  "dgSpecHash": "jmReFEOv4whJV000pdtUX8oRQnlnpHwgEsEU1QKthvZU9Gno5z43gVEUNSdfvG6PkLgalsQ5BksOsvPEpNFX6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Maaroufi\\Desktop\\pfe_project\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+  "projectFilePath": "C:\\Users\\Maaroufi\\Desktop\\Projets Internes\\SI-RH\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Maaroufi\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\Maaroufi\\.nuget\\packages\\hangfire\\1.8.4\\hangfire.1.8.4.nupkg.sha512",

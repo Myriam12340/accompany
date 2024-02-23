@@ -38,10 +38,11 @@ namespace Accompany_consulting.Data
         }
      public DbSet<eval__mensuel> eval__mensuel { get; set; }
 
-       
+
+
+        public DbSet<Recuperation> Recuperation { get; set; }
 
 
 
-      
     }
 }

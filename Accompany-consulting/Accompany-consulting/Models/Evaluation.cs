@@ -51,5 +51,8 @@ namespace Accompany_consulting.Models
         public string? Communication_interne_com { get; set; }
         public string? ProcessusR_com { get; set; }
         public string? suggestion { get; set; }
+
+        public string? commentaire_Aspects_RH { get; set; }
+        public string? commentaire_travailler { get; set; }
     }
 }

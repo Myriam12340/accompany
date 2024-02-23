@@ -95,6 +95,9 @@ namespace Accompany_consulting.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("imprime")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Conge");
@@ -123,6 +126,9 @@ namespace Accompany_consulting.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date_naissance")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date_sortie")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Fonction")
@@ -317,6 +323,12 @@ namespace Accompany_consulting.Migrations
                     b.Property<string>("VieCabinetRH")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("commentaire_Aspects_RH")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("commentaire_travailler")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("consultant")
                         .HasColumnType("int");
 
@@ -359,6 +371,51 @@ namespace Accompany_consulting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Mission");
+                });
+
+            modelBuilder.Entity("Accompany_consulting.Models.Recuperation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateDebut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateDemande")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Demandeur")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Validateur")
+                        .HasColumnType("int");
+
+                    b.Property<string>("commentaire")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("duree")
+                        .HasColumnType("float");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("manager")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("numeroDemande")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recuperation");
                 });
 
             modelBuilder.Entity("Accompany_consulting.Models.User", b =>
@@ -474,6 +531,9 @@ namespace Accompany_consulting.Migrations
                     b.Property<int>("Hr")
                         .HasColumnType("int");
 
+                    b.Property<string>("commentaire")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("consultant")
                         .HasColumnType("int");
 
@@ -481,6 +541,9 @@ namespace Accompany_consulting.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("decision")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("entreprise")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("notefinal")

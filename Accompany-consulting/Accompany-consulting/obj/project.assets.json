@@ -8525,11 +8525,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Maaroufi\\Desktop\\pfe_project\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+      "projectUniqueName": "C:\\Users\\Maaroufi\\Desktop\\Projets Internes\\SI-RH\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
       "projectName": "Accompany-consulting",
-      "projectPath": "C:\\Users\\Maaroufi\\Desktop\\pfe_project\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
+      "projectPath": "C:\\Users\\Maaroufi\\Desktop\\Projets Internes\\SI-RH\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\Accompany-consulting.csproj",
       "packagesPath": "C:\\Users\\Maaroufi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Maaroufi\\Desktop\\pfe_project\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\obj\\",
+      "outputPath": "C:\\Users\\Maaroufi\\Desktop\\Projets Internes\\SI-RH\\back\\accompany\\Accompany-consulting\\Accompany-consulting\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

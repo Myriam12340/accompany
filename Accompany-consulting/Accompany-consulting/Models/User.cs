@@ -15,7 +15,6 @@ namespace Accompany_consulting.Models
         public override Boolean PhoneNumberConfirmed { get; set; }
 
 
-        [NotMapped]
         public override string NormalizedUserName { get; set; }
         [NotMapped]
         public string NormalizedEmail { get; set; }
